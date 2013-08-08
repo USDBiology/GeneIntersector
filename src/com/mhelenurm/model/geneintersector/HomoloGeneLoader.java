@@ -22,7 +22,7 @@ public class HomoloGeneLoader {
 	/**
 	 *
 	 */
-	public static double lastIntersectionPercent;
+	public static int lastIntersectionPercent;
 	private static final Logger LOG = Logger.getLogger(HomoloGeneLoader.class.getName());
 
 	/**
@@ -131,7 +131,8 @@ public class HomoloGeneLoader {
         int intercount = control.size();
         int totalcount = totalset.size();
         
-        lastIntersectionPercent = 100.0*(double)intercount/(double)totalcount;
+		//lastIntersectionPercent = 100.0 * (double) intercount / (double) totalcount;
+		lastIntersectionPercent = intercount;
                 //finds the names for each resulting gene
         for (int i = 0; i < control.size(); i++) {
             ret.add(tree.getName(control.get(i)));

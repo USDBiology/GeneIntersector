@@ -49,9 +49,18 @@ public class GeneIntersector extends JFrame implements DropTargetListener {
 	 * @throws Exception The exception thrown.
 	 */
 	public static void main(String[] args) {
+
 		GeneIntersector gi = new GeneIntersector();
-		gi.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		gi.setVisible(true);
+		for (int i = 0; i < args.length; i++) {
+			File ff = new File(args[i]);
+			gi.stripFile(ff);
+
+		}
+		if (args.length == 0) {
+			gi.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			gi.setVisible(true);
+		}
+
 	}
 	private GeneTree _tree;
 	private JLabel openCSVLabel;
@@ -117,14 +126,7 @@ public class GeneIntersector extends JFrame implements DropTargetListener {
 		exportButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				File directory = new File(lastFile.getParent() + "/" + lastFile.getName().substring(0, lastFile.getName().length() - 4) + "_intersection.csv");
-				try {
-					PrintWriter p = new PrintWriter(directory);
-					p.println(lastOutput);
-					p.close();
-				} catch (FileNotFoundException ex) {
-					LOG.log(Level.OFF, "Can't write file! :(");
-				}
+				saveCSV();
 			}
 		});
 
@@ -165,6 +167,17 @@ public class GeneIntersector extends JFrame implements DropTargetListener {
 				stripFile(f);
 			}
 
+		}
+	}
+
+	private void saveCSV() {
+		File directory = new File(lastFile.getParent() + "/" + lastFile.getName().substring(0, lastFile.getName().length() - 4) + "_intersection.csv");
+		try {
+			PrintWriter p = new PrintWriter(directory);
+			p.println(lastOutput);
+			p.close();
+		} catch (FileNotFoundException ex) {
+			LOG.log(Level.OFF, "Can't write file! :(");
 		}
 	}
 
@@ -237,8 +250,8 @@ public class GeneIntersector extends JFrame implements DropTargetListener {
 			lastOutput = "Intersection Name,Percent of Intersection,,Intersecting Genes...\n";
 			outputArea.setText("");
 			ArrayList<String> inter = HomoloGeneLoader.getIntersection(array, _tree);
-			outputArea.append("All (" + String.format("%.1f", HomoloGeneLoader.lastIntersectionPercent) + "%): " + inter + "\n");
-			lastOutput += "All," + String.format("%.1f", HomoloGeneLoader.lastIntersectionPercent) + "%,";
+			outputArea.append("All (" + String.format("%d", HomoloGeneLoader.lastIntersectionPercent) + "): " + inter + "\n");
+			lastOutput += "All," + String.format("%d", HomoloGeneLoader.lastIntersectionPercent) + ",";
 			for (int i = 0; i < inter.size(); i++) {
 				lastOutput += "," + inter.get(i);
 			}
@@ -250,8 +263,8 @@ public class GeneIntersector extends JFrame implements DropTargetListener {
 			for (int i = 0; i < array.length; i++) {
 				for (int j = i + 1; j < array.length; j++) {
 					inter = HomoloGeneLoader.getIntersection(new ArrayList[]{array[i], array[j]}, _tree);
-					outputArea.append("\n" + names.get(i) + " vs. " + names.get(j) + " (" + String.format("%.1f", HomoloGeneLoader.lastIntersectionPercent) + "%): ");
-					lastOutput += "\n" + names.get(i) + " vs. " + names.get(j) + "," + String.format("%.1f", HomoloGeneLoader.lastIntersectionPercent) + "%,";
+					outputArea.append("\n" + names.get(i) + " vs. " + names.get(j) + " (" + String.format("%d out of %d and %d", HomoloGeneLoader.lastIntersectionPercent, array[i].size(), array[j].size()) + "): ");
+					lastOutput += "\n" + names.get(i) + " vs. " + names.get(j) + "," + String.format("%d out of %d and %d", HomoloGeneLoader.lastIntersectionPercent, array[i].size(), array[j].size()) + ",";
 					for (int k = 0; k < inter.size(); k++) {
 						lastOutput += "," + inter.get(k);
 					}

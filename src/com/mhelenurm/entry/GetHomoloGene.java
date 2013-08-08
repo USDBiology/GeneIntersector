@@ -9,23 +9,11 @@
  * borrow code, email me at <mhelenurm@gmail.com>
  */
 package com.mhelenurm.entry;
-
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JProgressBar;
-import org.apache.commons.net.ftp.FTPClient;
-import org.apache.commons.net.ftp.FTPFile;
-import org.apache.commons.net.ftp.FTPReply;
+/*
+ import java.util.logging.Logger;
+//import org.apache.commons.net.ftp.FTPClient;
+//import org.apache.commons.net.ftp.FTPFile;
+//import org.apache.commons.net.ftp.FTPReply;
 
 /**
  *
@@ -33,7 +21,8 @@ import org.apache.commons.net.ftp.FTPReply;
  * @version 1.0
  * @since Jun 19, 2013
  */
-public class GetHomoloGene {
+/*
+ public class GetHomoloGene {
 
 	private static final Logger LOG = Logger.getLogger(GetHomoloGene.class.getName());
 
@@ -42,6 +31,7 @@ public class GetHomoloGene {
 	 *
 	 * @param args
 	 */
+/*
 	public static void main(String[] args) {
 		FTPClient ftp = new FTPClient();
 		try {
@@ -135,3 +125,5 @@ public class GetHomoloGene {
 		}
 	}
 }
+
+	 */
