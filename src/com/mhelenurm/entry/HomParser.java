@@ -36,9 +36,9 @@ public class HomParser {
 	 */
 	public void parseFile() {
 		try {
-			java.net.URL fileloc = this.getClass().getClassLoader().getResource("homologene.data");
+			java.net.URL fileloc = HomParser.class.getResource("homologene.data");
 			File ff = new File(fileloc.getFile());
-			File output = new File(ff.getParentFile() + "/homout.data");
+			File output = new File(ff.getParentFile() + "/homnum.data");
 			Scanner s = new Scanner(ff);
 			PrintWriter p = new PrintWriter(output);
 
@@ -59,7 +59,7 @@ public class HomParser {
 			}
 			LOG.log(Level.OFF, "Done.");
 			for (int i = 0; i < ids.size(); i++) {
-				p.println(ids.get(i) + " " + names.get(i));
+				p.println(ids.get(i) + "\t" + names.get(i));
 			}
 			p.close();
 		} catch (FileNotFoundException e) {
